@@ -82,11 +82,11 @@ const eeiaCssStyle = `
     }
     .eeia-chat-header .adminName h4 {
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
         margin: 0;
     }
     .eeia-chat-header .adminName p {
-        font-size: 0.7rem;
+        font-size: 0.7rem !important;
         margin: 0;
     }
 
