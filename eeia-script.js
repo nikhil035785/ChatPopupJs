@@ -1,7 +1,7 @@
 const eeiaCssStyle = `
 
     .eeia-parentDiv {
-        position: absolute; bottom: 15px; right: 15px;
+        position: fixed; bottom: 15px; right: 15px;z-index: 10000;
     }
     .eeia-button {
         width: 50px; aspect-ratio:1; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #000; font-size: 12px; font-weight: bold; cursor: pointer; border: none; background-color: chartreuse; box-shadow: 0px 1px 15px 4px #0000002b;float: right;
