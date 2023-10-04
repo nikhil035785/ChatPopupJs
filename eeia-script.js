@@ -1,5 +1,7 @@
 const eeiaCssStyle = `
-
+    .eeia-parentDiv * {
+        font-family: 'Sans-serif';
+    }
     .eeia-parentDiv {
         position: fixed; bottom: 15px; right: 15px;z-index: 10000;
     }
@@ -38,6 +40,7 @@ const eeiaCssStyle = `
         position: relative;
         transform: translateY(50px);
         transition: all 1000ms ease-in-out;
+        box-shadow: 0 7px 15px 0 rgba(0, 0, 0, .13), 0 1px 4px 0 rgba(0, 0, 0, .11);
     }
 
     .eeia-chat-card.show-card {
@@ -96,9 +99,23 @@ const eeiaCssStyle = `
         flex-direction: column;
         max-height: 300px;
         overflow-y: auto;
-        margin-bottom: 10px;
     }
 
+    .eeia-questions {
+        margin-bottom: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .eeia-questions .eeiaQuestionButton {
+        font-size: 12px !important;
+        border-radius: 5px;
+        border: none;
+        padding: 4px;
+        box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
+        background-color: #fbf9f9;
+    }
 
     .eeia-chats-messages::-webkit-scrollbar {
         width: 0.5em;
@@ -116,10 +133,23 @@ const eeiaCssStyle = `
     .eeia-chats-messages .eeia-user-message,
     .eeia-chats-messages .eeia-admin-message {
         max-width: 80%;
-        border-radius: 9px;
+        border-radius: 6px;
         padding: 5px 10px;
-        font-size: 0.9rem;
         margin-bottom: 5px;
+        position: relative;
+    }
+    
+    .eeia-chats-messages .eeia-user-message p,
+    .eeia-chats-messages .eeia-admin-message p {
+        font-size: 0.9rem;
+        padding-right: 16px;
+    }
+
+    .eeia-chats-messages .eeia-user-message .eeia-status-icon {
+        position: absolute;
+        bottom: -3px;
+        right: 3px;
+        opacity: 0.5;
     }
 
     .eeia-chats-messages .eeia-user-message {
@@ -224,16 +254,22 @@ const eeiaCssStyle = `
         position: absolute;
         right: 5px;
         top: 25px;
+        margin-top: 0px;
         width: 100px;
         padding: 0;
+        border-radius: 5px;
+        overflow: hidden;
     }
-    
+    .eeiaChatActions .eeiaDropdownInner ul.nav-list li {
+        border-bottom: 1px solid #7fff00;
+    }
     .eeiaChatActions .eeiaDropdownInner ul.nav-list li a {
         color: #000;
         padding: 5px;
         text-decoration: none;
-        width: 100%;
         display: block;
+        font-size: 14px;
+        background-color: #fff;
     }
     
     .eeiaChatActions .eeiaDropdownInner ul.nav-list li a:hover {
@@ -268,14 +304,21 @@ const eeiaDataObjects = {
 
     'menuIcon' : `<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H14M4 18H9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`,
 
-    'crossIcon' : `<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#0F0F0F"></path> </g></svg>`
+    'crossIcon' : `<svg width="25px" height="25px" style="margin-top: -3px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#0F0F0F"></path> </g></svg>`,
+
+    'sentIcon' : `<svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Check"> <path id="Vector" d="M6 12L10.2426 16.2426L18.727 7.75732" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>`,
+
+    'deliveredIcon' : `<svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Check_All"> <path id="Vector" d="M8 12.4854L12.2426 16.728L20.727 8.24268M3 12.4854L7.24264 16.728M15.7279 8.24268L12.5 11.5001" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>`,
+
+    'seenIcon' : `<svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Check_All"> <path id="Vector" d="M8 12.4854L12.2426 16.728L20.727 8.24268M3 12.4854L7.24264 16.728M15.7279 8.24268L12.5 11.5001" stroke="#6524ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>`
 }
 
 
 const conversationMessages = [
     {
         'userType' : 'user',
-        'message' : 'Who are you?'
+        'message' : 'Who are you?',
+        'messageStatus' : 'seen'
     },
     {
         'userType' : 'admin',
@@ -283,7 +326,32 @@ const conversationMessages = [
     },
     {
         'userType' : 'user',
-        'message' : 'Who are you?'
+        'message' : 'Who are you?',
+        'messageStatus' : 'delivered'
+    },
+    {
+        'userType' : 'user',
+        'message' : 'Who are you?',
+        'messageStatus' : 'sent'
+    }
+]
+
+
+const defaultQuestionsList = [
+    {
+        question: 'What do you want to do?'
+    },
+    {
+        question: 'What do you want to do?'
+    },
+    {
+        question: 'What do you want to do?'
+    },
+    {
+        question: 'What do you want to do?'
+    },
+    {
+        question: 'What do you want to do?'
     }
 ]
 
@@ -394,30 +462,38 @@ document.addEventListener("DOMContentLoaded", (event) => {
     chatMessages.setAttribute('id', 'eeiaChatMessages');
 
     function UpdateMessageSection() {
+        chatMessages.innerHTML = '';
         conversationMessages.forEach(chatMessage => {
             const chatMessageBody = document.createElement("div");
             chatMessageBody.className = chatMessage.userType === 'user' ? 'eeia-user-message' : 'eeia-admin-message';
-            chatMessageBody.innerText = chatMessage.message;
+            const createPElement = document.createElement('p');
+            createPElement.style.margin = 0;
+            createPElement.innerText = chatMessage.message;
+            chatMessageBody.appendChild(createPElement);
+            if(chatMessage.userType === 'user') {
+                const createIconElement = document.createElement('span');
+                createIconElement.classList = 'eeia-status-icon';
+                if(chatMessage.messageStatus === 'seen') createIconElement.innerHTML = eeiaDataObjects.seenIcon;
+                else if(chatMessage.messageStatus === 'delivered') createIconElement.innerHTML = eeiaDataObjects.deliveredIcon;
+                else createIconElement.innerHTML = eeiaDataObjects.sentIcon;
+                chatMessageBody.appendChild(createIconElement);
+            }
+
             chatMessages.appendChild(chatMessageBody);
         })
     }
 
+
+    const defaultQuestions = document.createElement('div');
+    defaultQuestions.setAttribute('class', 'eeia-questions');
+    defaultQuestions.setAttribute('id', 'eeiaQuestions');
 
     //  Send section parent Element
     const chatSend = document.createElement('div');
     chatSend.setAttribute('class', 'eeia-send-section');
     chatSend.setAttribute('id', 'eeiaSendSection');
 
-    function getTextAndSend() {
-        if(chatInputbox.value.trim().length > 0) {
-            conversationMessages.push({'userType': 'user', 'message': chatInputbox.value});
-            chatMessages.innerHTML = ``;
-            UpdateMessageSection();
-            chatInputbox.value = '';
-        }
-    }
 
-    //  Input Element for text message
     const chatInputbox = document.createElement('input');
     chatInputbox.setAttribute('type', 'text');
     chatInputbox.setAttribute('placeholder', 'Type here...');
@@ -425,6 +501,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
     chatInputbox.addEventListener('input', function () {
         capitalizeFirstLetter(this);
     })
+
+    function getTextAndSend(defaultQuestions) {
+        if(defaultQuestions) {
+            conversationMessages.push({'userType': 'user', 'message': defaultQuestions, 'messageStatus' : 'sent'});
+        } else {
+            if(chatInputbox.value.trim().length > 0) {
+                conversationMessages.push({'userType': 'user', 'message': chatInputbox.value, 'messageStatus' : 'sent'});
+                chatMessages.innerHTML = ``;
+                chatInputbox.value = '';
+                chatInputbox.focus();
+            }
+        }
+        UpdateMessageSection();
+    }
+
+    //  Input Element for text message
+    
     chatInputbox.addEventListener('keydown', function(event) {
         if (event.keyCode === 13) {
             console.log(event);
@@ -458,6 +551,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
         CheckboxToOpenDropDown.checked = false;
     }
 
+    function showQuestions () {
+        defaultQuestionsList.forEach(q => {
+            const questionBtn = document.createElement('button');
+            questionBtn.setAttribute('class', 'eeiaQuestionButton');
+            questionBtn.innerText = q.question;
+            questionBtn.addEventListener('click', () => getTextAndSend(q.question));
+            defaultQuestions.appendChild(questionBtn);
+        });
+    }
+
     function createChatCardPopup () {
 
         chatCard.appendChild(chatCardHeader);
@@ -467,6 +570,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         chatCard.appendChild(chatCardBody);
 
         chatCardBody.appendChild(chatMessages);
+        showQuestions();
+        chatCardBody.appendChild(defaultQuestions);
 
         chatSend.appendChild(chatInputbox);
 
