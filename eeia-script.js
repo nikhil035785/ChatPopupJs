@@ -115,19 +115,23 @@ const eeiaCssStyle = `
         padding: 4px;
         box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
         background-color: #fbf9f9;
+        cursor: pointer;
+    }
+    .eeia-questions .eeiaQuestionButton:hover {
+        background-color: #ebe3e3;
     }
 
     .eeia-chats-messages::-webkit-scrollbar {
-        width: 0.5em;
+        width: 5px;
     }
     
     .eeia-chats-messages::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 0 64px rgba(0, 0, 0, 0.3);
     }
     
     .eeia-chats-messages::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
     }
 
     .eeia-chats-messages .eeia-user-message,
@@ -339,19 +343,19 @@ const conversationMessages = [
 
 const defaultQuestionsList = [
     {
-        question: 'What do you want to do?'
+        question: "What's your favorite hobby?"
     },
     {
-        question: 'What do you want to do?'
+        question: 'Do you have any travel plans coming up?'
     },
     {
-        question: 'What do you want to do?'
+        question: "What's the last movie you watched and enjoyed?"
     },
     {
-        question: 'What do you want to do?'
+        question: "Coffee or tea?"
     },
     {
-        question: 'What do you want to do?'
+        question: "If you could instantly learn any skill, what would it be?"
     }
 ]
 
@@ -481,6 +485,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             chatMessages.appendChild(chatMessageBody);
         })
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
 
